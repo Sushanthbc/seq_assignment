@@ -1,0 +1,14 @@
+less_than_50:
+  value: 0.01
+  lower_range: 0
+  higher_range: 50
+
+50_to_300:
+  value: 0.0095
+  lower_range: 50
+  higher_range: 300
+
+greater_than_300:
+  value: 0.0085
+  lower_range: 300
+  higher_range: 100000000
