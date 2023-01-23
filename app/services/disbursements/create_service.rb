@@ -2,6 +2,7 @@ module Disbursements
   class CreateService < ApplicationService
     include Dry::Monads[:result, :maybe]
     attr_reader :start_datetime, :end_datetime
+
     def initialize(start_datetime=nil, end_datetime=nil)
       @start_datetime = start_datetime || Time.now.last_week.beginning_of_week
       @end_datetime = end_datetime || Time.now.last_week.end_of_week
