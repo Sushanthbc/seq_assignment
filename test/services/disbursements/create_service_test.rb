@@ -7,7 +7,7 @@ module Disbursements
         merchant: merchants(:treutel),
         shopper: shoppers(:olive),
         amount: 230,
-        completed_at: Time.now.last_week.beginning_of_week + 1
+        completed_at: Time.now.last_week.beginning_of_week + 1.day
       )
       result = Disbursements::CreateService.perform
       disbursement = Disbursement.find_by(order_id: order.id)
@@ -58,7 +58,7 @@ module Disbursements
         merchant: merchants(:treutel),
         shopper: shoppers(:olive),
         amount: -1,
-        completed_at: Time.now.last_week.beginning_of_week + 1
+        completed_at: Time.now.last_week.beginning_of_week + 1.day
       )
       result = Disbursements::CreateService.perform
       assert result.failure?
@@ -71,12 +71,32 @@ module Disbursements
       Order.create!(
         merchant: merchants(:treutel),
         shopper: shoppers(:olive),
+        amount: 200,
+        completed_at: Time.now.last_week.beginning_of_week + 1.day
+      )
+      Order.create!(
+        merchant: merchants(:treutel),
+        shopper: shoppers(:olive),
         amount: -1,
-        completed_at: Time.now.last_week.beginning_of_week + 1
+        completed_at: Time.now.last_week.beginning_of_week + 1.day
       )
       result = Disbursements::CreateService.perform
       assert result.failure?
       assert Disbursement.all.empty?
+    end
+
+    test "exclude if its already processed for week" do
+      Order.create!(
+        merchant: merchants(:treutel),
+        shopper: shoppers(:olive),
+        amount: 200,
+        completed_at: Time.now.last_week.beginning_of_week + 1.day
+      )
+      Disbursements::CreateService.perform
+      result = Disbursements::CreateService.perform
+
+      assert result.success?
+      assert result.value!.empty?
     end
   end
 end

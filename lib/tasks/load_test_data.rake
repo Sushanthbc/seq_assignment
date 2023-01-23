@@ -32,7 +32,7 @@ task :load_test_data => :environment do
       merchant_id: order["merchant_id"],
       shopper_id: order["shopper_id"],
       amount: order["amount"],
-      completed_at: order["completed_at"]
+      completed_at: Time.now.last_week.beginning_of_week + Random.random_number(7)
     )
   end
 
