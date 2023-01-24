@@ -51,13 +51,13 @@ ID | MERCHANT ID | SHOPPER ID | AMOUNT | CREATED AT           | COMPLETED AT
 
 ```
 
-# Database Design:
+## Database Design:
 
 [https://dbdiagram.io/d/63cba2eb296d97641d7b26ac](https://dbdiagram.io/d/63cba2eb296d97641d7b26ac) (Full context)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9a85f729-2d09-4fc3-9933-a389601c1c72/Untitled.png)
+![img_1.png](img_1.png)
 
-## Relationship call outs
+### Relationship call outs
 
 1. The shopper has many orders, and the order belongs to the shopper.
 2. The merchant has many orders, and the order belongs to the merchant.
@@ -76,7 +76,7 @@ ID | MERCHANT ID | SHOPPER ID | AMOUNT | CREATED AT           | COMPLETED AT
         2. order amount < **`100000000`** euro
 
 
-# Business Logic
+## Business Logic
 
 1. A lot of heavy lifting is done by the service `Disbursements::CreateService.perfo`
     1. The approach I have taken is the Railway Oriented Programming paradigm, and dry-rb's monads give nice methods to achieve it, more information on -
@@ -90,8 +90,11 @@ ID | MERCHANT ID | SHOPPER ID | AMOUNT | CREATED AT           | COMPLETED AT
 4. To fetch all the disbursements.
     1. it is mandatory to pass the `start_date_of_week`
     2. The `merchant_id` is optional
+    ```bash
+	  {{host}}/api/disbursements?start_date_of_week="2023-01-23"&merchant_id=5
+    ```
 
-# Improvements:
+## Improvements:
 
 - Build an authentication and rate limiter layer for the APIs.
 - Ensure that if a job is running, the system prevents the same job from running again at the same time and that two workers are not picking up the same task.
@@ -100,7 +103,6 @@ ID | MERCHANT ID | SHOPPER ID | AMOUNT | CREATED AT           | COMPLETED AT
 - Extract complex queries in the disbursement controller to query objects, so they can be tested in isolation.
 - Extract filter validation to a concern.
 - Plug in coverage tools such as Simplecov.
-
 
 
 ## How to set up a dev machine?
