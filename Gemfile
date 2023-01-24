@@ -14,7 +14,7 @@ gem 'pg', '~> 1.4', '>= 1.4.5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.6.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -24,6 +24,8 @@ gem 'redis', '~> 4.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'dry-monads', '~> 1.6'
+gem 'sidekiq', '~>6.4.1'
+gem 'sidekiq-cron', '~> 1.2'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
