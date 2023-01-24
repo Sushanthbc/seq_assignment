@@ -1,0 +1,4 @@
+disbursement_weekly:
+  cron: "0 0 * * MON"
+  class: "Disbursements::CreateServiceJob.perform"
+  queue: default
