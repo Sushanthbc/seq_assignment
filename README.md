@@ -93,6 +93,7 @@ ID | MERCHANT ID | SHOPPER ID | AMOUNT | CREATED AT           | COMPLETED AT
     ```bash
 	  {{host}}/api/disbursements?start_date_of_week="2023-01-23"&merchant_id=5
     ```
+5. A Sidekiq cron job uses a schedule.yml file to load all the jobs to a Redis queue and runs them at the specified time.
 
 ## Improvements:
 
@@ -121,19 +122,20 @@ ID | MERCHANT ID | SHOPPER ID | AMOUNT | CREATED AT           | COMPLETED AT
     ```
 
 - Database creation, migrations, and seeding
-
     ```bash
     rails db:create db:migrate db:seed
     ```
 
 - How to run the test suite
-
     ```bash
     rails test
     ```
 
 - Loading test data using rake task
-
     ```bash
     rake load_test_data
     ```
+- Run sidekiq
+  ```bash
+  bundle exec sidekiq
+  ```
